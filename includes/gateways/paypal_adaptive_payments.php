@@ -113,7 +113,7 @@ function atcf_settings_gateway_paypal_adaptive_payments( $settings ) {
 
 	$settings[ 'epap_flexible_fee' ] = array(
 		'id'   => 'epap_flexible_fee',
-		'name' => __( 'Additional Flexible Fee', 'epap' ),
+		'name' => __( 'Additional Flexible Fee', 'atcf' ),
 		'desc' => __( '%. <span class="description">If a campaign is flexible, increase commission by this percent.</span>', 'atcf' ),
 		'type' => 'text',
 		'size' => 'small'

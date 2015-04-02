@@ -1,3 +1,7 @@
+#### 1.8.5: April 1, 2015
+
+* Fix: Campaign Submission form displays unformatted goal amount after Save & Preview.
+
 #### 1.8.4: March 6, 2015
 
 * Fix: Backer count is correctly updated when multiple pledges to the same campaign are made in the same order.

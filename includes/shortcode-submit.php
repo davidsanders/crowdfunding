@@ -390,7 +390,7 @@ class ATCF_Submit_Campaign {
 			break;
 
 			case 'goal' :
-				$data = edd_format_amount( $campaign->goal(false) );
+				$data = $campaign->goal( false );
 			break;
 
 			case 'tos' :
