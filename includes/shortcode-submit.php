@@ -337,8 +337,8 @@ class ATCF_Submit_Campaign {
 	 * @param $args The state of the current campaign being created/edited
 	 * @return $field The array of modified form arguments.
 	 */
-	public function get_field_value( $key, $field, $args ) {
-		if ( !is_null( $args['campaign'] ) )
+	public function get_field_value( $key, $field, $args ) {		
+		if ( !is_null( $args['campaign'] ) )			
 			$field[ 'value' ] = $this->saved_data( $key, $args['campaign'] );
 		else
 			$field[ 'value' ] = isset ( $_POST[ $key ] ) ? $_POST[ $key ] : $field[ 'default' ];
@@ -402,7 +402,8 @@ class ATCF_Submit_Campaign {
 			break;
 
 			default :
-				$data = apply_filters( 'atcf_shortcode_submit_saved_data_' . $key, null, $key, $campaign );
+				$data = $campaign->__get( 'campaign_' . $key );
+				$data = apply_filters( 'atcf_shortcode_submit_saved_data_' . $key, $data, $key, $campaign );
 			break;
 		}
 

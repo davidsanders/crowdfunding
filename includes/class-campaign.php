@@ -195,7 +195,7 @@ class ATCF_Campaign {
 
 		$backers_args = apply_filters( 'atcf_campaign_backers_args', array(
 	       'post_parent'    => $this->ID,
-	       'log_type'       => atcf_has_preapproval_gateway() ? 'preapproval' : 'sale',
+	       'log_type'       => array( 'preapproval', 'sale' ),
 	       'post_status'    => array( 'publish' ),
 	       'posts_per_page' => -1
 	    ) );
@@ -362,6 +362,7 @@ class ATCF_Campaign {
 	 * @return sting $total The amount funded (currency formatted or not)
 	 */
 	public function current_amount( $formatted = true ) {
+		global $wpdb;
 
 		// Don't do this more than once
 		if ( ! isset( $this->current_amount ) ) {
@@ -372,9 +373,12 @@ class ATCF_Campaign {
 			$this->current_amount = 0; 
 
 			foreach( $campaign_ids as $campaign_id ) {
-
+				// echo '<pre>';
+				// var_dump( get_post_meta( $campaign_id, '_edd_download_earnings', true ) );
+				// var_dump( get_post_meta( $campaign_id, '_edd_download_preapproved_earnings', true ) );
+				// die;
 				$this->current_amount += get_post_meta( $campaign_id, '_edd_download_earnings', true );
-
+				$this->current_amount += get_post_meta( $campaign_id, '_edd_download_preapproved_earnings', true );
 			}
 		}
 	

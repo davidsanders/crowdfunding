@@ -92,6 +92,84 @@ function atcf_update_backer_count( $payment_id, $direction ) {
 	}
 }
 
+/**
+ * Log preapproved payment total for campaigns. 
+ * 
+ * @since 1.8.7
+ *
+ * @param int $payment the ID number of the payment
+ * @param string $new_status
+ * @param string $old_status
+ * @return void
+ */
+function atcf_log_preapproval_payment_total( $payment_id, $new_status, $old_status ) {
+	global $edd_logs;
+
+	// If we're in test mode, don't proceed unless expected.
+	if ( edd_is_test_mode() && ! apply_filters( 'edd_log_test_payment_stats', false ) ) {
+		return;
+	}
+
+	// Don't do anything if $new_status and $old_status are the same
+	if ( $new_status == $old_status ) {
+		return;
+	}
+
+	// If the status has become preapproved.
+	if ( 'preapproval' == $new_status ) {
+
+		atcf_update_preapproval_total( $payment_id, 'increase' );
+
+	}
+	// If the status was preapproved.
+	elseif ( 'preapproval' == $old_status ) {
+
+		atcf_update_preapproval_total( $payment_id, 'decrease' );
+
+	}	
+}
+add_action( 'edd_update_payment_status', 'atcf_log_preapproval_payment_total', 100, 3 );
+
+/**
+ * Update the preapproval total for all the campaigns donated to in the payment. 
+ *
+ * @param 	int $payment
+ * @param 	string $direction
+ * @return  void
+ * @since   1.8.7
+ */
+function atcf_update_preapproval_total( $payment_id, $direction ) {
+	$downloads = edd_get_payment_meta_cart_details( $payment_id );
+
+	if ( ! is_array( $downloads ) ) {
+		return;
+	}
+
+	foreach ( $downloads as $download ) {
+		$preapproval_total = get_post_meta( $download[ 'id' ], '_edd_download_preapproved_earnings', true );
+
+		if ( ! $preapproval_total ) {
+			$preapproval_total = 0;
+		}
+
+		if ( 'increase' == $direction ) {
+
+			$preapproval_total += $download[ 'price' ];
+
+		}
+		else {
+
+			$preapproval_total -= $download[ 'price' ];
+
+		}
+		
+		update_post_meta( $download[ 'id' ], '_edd_download_preapproved_earnings', $preapproval_total );
+	}
+}
+
+/**
+ * Display anonymous backer option on checkout.
+ */
 function atcf_edd_purchase_form_user_info() {
 	if ( ! atcf_theme_supports( 'anonymous-backers' ) )
 		return;
@@ -152,8 +230,6 @@ function atcf_edd_add_to_cart_item( $cart_item ) {
 
 	if ( $custom_price > $price ) {
 		$cart_item[ 'options' ][ 'atcf_extra_price' ] = $custom_price - $price;
-
-		return $cart_item;
 	}
 
 	return $cart_item;

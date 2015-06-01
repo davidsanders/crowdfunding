@@ -5,7 +5,7 @@
  * Description:			A crowdfunding platform in the likes of Kickstarter and Indigogo. Originally developed by Astoundify; now maintained by Studio 164a for customers using the Franklin Crowdfunding Theme.
  * Author:				Studio 164a
  * Author URI:			https://164a.com
- * Version:     		1.8.5
+ * Version:     		1.9
  * Text Domain: 		atcf
  * GitHub Plugin URI: 	https://github.com/Studio164a/crowdfunding
  * GitHub Branch:    	master
@@ -76,7 +76,7 @@ final class ATCF_CrowdFunding {
 	private function setup_globals() {
 		/** Versions **********************************************************/
 
-		$this->version    = '1.8.4';
+		$this->version    = '1.9';
 		$this->version_db = get_option( 'atcf_version' );
 		$this->db_version = '1';
 
@@ -158,7 +158,7 @@ final class ATCF_CrowdFunding {
 		add_filter( 'template_include', array( $this, 'template_loader' ) );
 
 		// Upgrade Routine
-		add_action( 'admin_init', array( $this, 'check_upgrade' ) );
+		add_action( 'admin_init', array( $this, 'maybe_upgrade' ) );
 
 		// Textdomain
 		add_action( 'init', array( $this, 'load_textdomain' ) );
@@ -167,22 +167,15 @@ final class ATCF_CrowdFunding {
 	}
 
 	/**
-	 *
+	 * Handle version upgrades.
 	 */
-	function check_upgrade() {
-		if ( false === $this->version_db || version_compare( $this->version, $this->version_db, '<' ) ) {
-			$this->upgrade_routine();
-		}
-	}
+	function maybe_upgrade() {		
+		if ( false === $this->version_db || version_compare( $this->version_db, $this->version, '<' ) ) {
+			
+			require_once( $this->includes_dir . 'class-upgrade.php' );
+			
+			ATCF_Upgrade::upgrade_from( $this->version_db, $this->version );
 
-	function upgrade_routine() {
-		flush_rewrite_rules();
-
-		// If we are on 1.8, but their version is older.
-		if ( $this->version === '1.8' || ! $this->version_db ) {
-			ATCF_Install::init(); // Just run the installer again
-
-			add_option( 'atcf_version', $this->version );
 		}
 	}
 
