@@ -1,3 +1,8 @@
+#### 1.9: June 1, 2015
+
+* Improvement: Split tallies of preapproved and completed payments for campaigns. This allows for simpler retrieval of the total pledged amount for a campaign.
+* Improvement: Consistent saving of custom post meta fields, with "campaign_" prepended before the meta key. This makes is easier to get those values back out using ATCF_Campaign's magic getter method (`__get()`).
+
 #### 1.8.5: April 1, 2015
 
 * Fix: Campaign Submission form displays unformatted goal amount after Save & Preview.
