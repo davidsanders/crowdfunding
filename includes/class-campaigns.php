@@ -533,14 +533,22 @@ function _atcf_metabox_campaign_info() {
 	</p>
 
 	<p>
-		<label for="campaign_goal"><strong><?php _e( 'Goal:', 'atcf' ); ?></strong></label><br />
-		<?php if ( ! isset( $edd_options[ 'currency_position' ] ) || $edd_options[ 'currency_position' ] == 'before' ) : ?>
-			<?php echo edd_currency_filter( '' ); ?><input type="text" name="campaign_goal" id="campaign_goal" value="<?php echo $campaign->goal(false); ?>" style="width:80px" />
-		<?php else : ?>
-			<input type="text" name="campaign_goal" id="campaign_goal" value="<?php echo edd_format_amount($campaign->goal(false) ); ?>" style="width:80px" /><?php echo edd_currency_filter( '' ); ?>
-		<?php endif; ?>
-	</p>
+		<?php
+		$goal_args = array(
+			'name'  => 'campaign_goal',
+			'value' => esc_attr( edd_format_amount( $campaign->goal( false ) ) ),
+			'class' => 'edd-price-field'
+		);
 
+		if ( 'before' == edd_get_option( 'currency_position', 'before' ) ) :
+			echo edd_currency_filter( '' );
+			echo EDD()->html->text( $goal_args );
+		else :
+			echo EDD()->html->text( $goal_args );
+			echo edd_currency_filter( '' );
+		endif; 
+		?>
+	</p>
 	<p>
 		<label for="campaign_location"><strong><?php _e( 'Location:', 'atcf' ); ?></strong></label><br />
 		<input type="text" name="campaign_location" id="campaign_location" value="<?php echo esc_attr( $campaign->location() ); ?>" class="regular-text" />

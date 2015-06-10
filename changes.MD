@@ -1,3 +1,7 @@
+#### 1.9.1: June 10, 2015
+
+* Fix: Corrected handling of different currency formats when saving campaign goal.
+
 #### 1.9: June 1, 2015
 
 * Improvement: Split tallies of preapproved and completed payments for campaigns. This allows for simpler retrieval of the total pledged amount for a campaign.
