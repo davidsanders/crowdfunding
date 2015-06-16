@@ -5,7 +5,7 @@
  * Description:			A crowdfunding platform in the likes of Kickstarter and Indigogo. Originally developed by Astoundify; now maintained by Studio 164a for customers using the Franklin Crowdfunding Theme.
  * Author:				Studio 164a
  * Author URI:			https://164a.com
- * Version:     		1.9.1
+ * Version:     		1.9.2
  * Text Domain: 		atcf
  * GitHub Plugin URI: 	https://github.com/Studio164a/crowdfunding
  * GitHub Branch:    	master
@@ -76,7 +76,7 @@ final class ATCF_CrowdFunding {
 	private function setup_globals() {
 		/** Versions **********************************************************/
 
-		$this->version    = '1.9';
+		$this->version    = '1.9.2';
 		$this->version_db = get_option( 'atcf_version' );
 		$this->db_version = '1';
 

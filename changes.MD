@@ -1,3 +1,7 @@
+#### 1.9.2: June 16, 2015
+
+* Fix: Force trailing slash on campaign permalinks when displaying edit link.
+
 #### 1.9.1: June 10, 2015
 
 * Fix: Corrected handling of different currency formats when saving campaign goal.

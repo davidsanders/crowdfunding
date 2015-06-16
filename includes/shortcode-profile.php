@@ -183,7 +183,7 @@ function atcf_shortcode_profile_campaigns( $user ) {
 
 				<ul class="actions">
 					<li><a href="<?php the_permalink(); ?>" title="<?php echo esc_attr( sprintf( __( 'Permalink to %s', 'atcf' ), the_title_attribute( 'echo=0' ) ) ); ?>" rel="bookmark"><?php _e( 'View', 'atcf' ); ?></a></li>
-					<li><a href="<?php the_permalink(); ?>edit/" title="<?php echo esc_attr( sprintf( __( 'Edit %s', 'atcf' ), the_title_attribute( 'echo=0' ) ) ); ?>" rel="bookmark"><?php _e( 'Edit', 'atcf' ); ?></a></li>
+					<li><a href="<?php echo trailingslashit( get_the_permalink() ) ?>edit/" title="<?php echo esc_attr( sprintf( __( 'Edit %s', 'atcf' ), the_title_attribute( 'echo=0' ) ) ); ?>" rel="bookmark"><?php _e( 'Edit', 'atcf' ); ?></a></li>
 					<?php do_action( 'atcf_profile_campaign_actions_all', $campaign ); ?>
 				</ul>
 
