@@ -203,7 +203,7 @@ class ATCF_Campaign {
 	       'log_type'       => array( 'preapproval', 'sale' ),
 	       'post_status'    => array( 'publish' ),
 	       'posts_per_page' => -1
-	    ) );
+	    ) );		
 
 		$backers = $edd_logs->get_connected_logs( $backers_args );
 

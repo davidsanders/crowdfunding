@@ -536,7 +536,7 @@ function _atcf_metabox_campaign_info() {
 		<?php
 		$goal_args = array(
 			'name'  => 'campaign_goal',
-			'value' => esc_attr( edd_format_amount( $campaign->goal( false ) ) ),
+			'value' => esc_attr( edd_format_amount( edd_sanitize_amount( $campaign->goal( false ) ) ) ),
 			'class' => 'edd-price-field'
 		);
 

@@ -25,27 +25,14 @@ function atcf_log_pledge_limit( $payment_id, $new_status, $old_status ) {
 		return;
 	}
 
-	// When shifting from pending status to something other than 
-	// those two, we should reduce the backer count.
-	if ( 'pending' == $old_status ) {
-
-		// Make sure the backer count is only incremented when the payment
-		// is completed or pre-approved.
-		if ( in_array( $new_status, array( 'publish', 'preapproval' ) ) ) {
-
-			atcf_update_backer_count( $payment_id, 'increase' );
-
-		}
+	// Increase payment stats for the campaigns. 
+	if ( atcf_should_increase_payment_stats( $new_status, $old_status ) ) {
+		atcf_update_backer_count( $payment_id, 'increase' );
 	}
-	// When shifting from a publish/preapproved status to something other than 
-	// those two, we should reduce the backer count.
-	else if ( in_array( $old_status, array( 'publish', 'preapproval' ) ) ) {
 
-		if ( ! in_array( $new_status,  array( 'publish', 'preapproval' ) ) ) {
-
-			atcf_update_backer_count( $payment_id, 'decrease' );
-
-		}
+	// Decrease payment stats for the campaigns. 
+	if ( atcf_should_decrease_payment_stats( $new_status, $old_status ) ) {
+		atcf_update_backer_count( $payment_id, 'decrease' );
 	}
 }
 add_action( 'edd_update_payment_status', 'atcf_log_pledge_limit', 100, 3 );
@@ -64,14 +51,14 @@ function atcf_update_backer_count( $payment_id, $direction ) {
 
 	if ( ! is_array( $downloads ) ) {
 		return;
-	}
+	}	
 
 	foreach ( $downloads as $download ) {
 
 		$variable_pricing = edd_get_variable_prices( $download[ 'id' ] );
-	
+
 		foreach ( $variable_pricing as $key => $value ) {
-			$what = isset( $download[ 'options' ][ 'price_id' ] ) ? $download[ 'options' ][ 'price_id' ] : 0;
+			$what = isset( $download[ 'options' ][ 'price_id' ] ) ? intval( $download[ 'options' ][ 'price_id' ] ) : 0;
 
 			if ( ! isset ( $variable_pricing[ $what ][ 'bought' ] ) ) {
 				$variable_pricing[ $what ][ 'bought' ] = 0;
@@ -79,7 +66,7 @@ function atcf_update_backer_count( $payment_id, $direction ) {
 
 			$current = $variable_pricing[ $what ][ 'bought' ];
 
-			if ( $key === $what ) {
+			if ( $key == $what ) {
 				if ( 'increase' == $direction ) {
 					$variable_pricing[ $what ][ 'bought' ] = $current + $download[ 'quantity' ];
 				} else {
@@ -129,6 +116,40 @@ function atcf_log_preapproval_payment_total( $payment_id, $new_status, $old_stat
 	}	
 }
 add_action( 'edd_update_payment_status', 'atcf_log_preapproval_payment_total', 100, 3 );
+
+/**
+ * Given a new status and an old status, this returns whether payment stats should be increased.
+ * 
+ * @param 	string 	$new_status
+ * @param 	string 	$old_status
+ * @return  boolean
+ * @since   1.9.3
+ */
+function atcf_should_increase_payment_stats( $new_status, $old_status ) {
+    return 'pending' == $old_status && in_array( $new_status, atcf_countable_statuses() );
+}
+
+/**
+ * Given a new status and an old status, this returns whether payment stats should be decreased.
+ * 
+ * @param 	string 	$new_status
+ * @param 	string 	$old_status
+ * @return  boolean
+ * @since   1.9.3
+ */
+function atcf_should_decrease_payment_stats( $new_status, $old_status ) {
+	return in_array( $old_status, atcf_countable_statuses() ) && ! in_array( $new_status, atcf_countable_statuses() );
+}
+
+/**
+ * Returns an array of any post statuses that are considered to mark a payment as countable.
+ * 
+ * @return  string[]
+ * @since   1.9.3
+ */
+function atcf_countable_statuses() {
+    return apply_filters( 'atcf_countable_statuses', array( 'publish', 'preapproval' ) );
+}
 
 /**
  * Update the preapproval total for all the campaigns donated to in the payment. 
