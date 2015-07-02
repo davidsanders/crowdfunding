@@ -14,8 +14,9 @@ class ATCF_Campaign {
 
 	function __construct( $post ) {
 		$this->data = get_post( $post );
-		if ($this->data) {
-		  $this->ID   = $this->data->ID;
+		
+		if ( $this->data ) {
+			$this->ID = $this->data->ID;
 		}
 	}
 
@@ -28,9 +29,10 @@ class ATCF_Campaign {
 	 * @return string $meta The fetched value
 	 */
 	public function __get( $key ) {
-		if (!$this->data) {
+		if ( ! $this->data ) {
 			return NULL;
 		}
+
 		$meta = apply_filters( 'atcf_campaign_meta_' . $key, $this->data->__get( $key ) );
 
 		return $meta;
