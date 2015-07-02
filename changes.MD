@@ -1,3 +1,9 @@
+#### 1.9.3: July 2, 2015
+
+* Fix: Increase / decrease backer counts correctly after payments are processed.
+* Fix: Gracefully handle instantiation of `ATCF_Campaign` class without a valid post. Hat tip @tiffanytse.
+* Improvement: Remove "URL" text from the end of profile contact methods. Hat tip @hackerhasid. 
+
 #### 1.9.2: June 16, 2015
 
 * Fix: Force trailing slash on campaign permalinks when displaying edit link.

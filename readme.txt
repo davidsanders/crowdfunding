@@ -61,6 +61,40 @@ Yes. However, it won't look much different than a standard EDD install. Template
 
 == Changelog ==
 
+= 1.9.3: July 2, 2015 =
+
+* Fix: Increase / decrease backer counts correctly after payments are processed.
+* Fix: Gracefully handle instantiation of `ATCF_Campaign` class without a valid post. Hat tip @tiffanytse.
+* Improvement: Remove "URL" text from the end of profile contact methods. Hat tip @hackerhasid. 
+
+= 1.9.2: June 16, 2015 =
+
+* Fix: Force trailing slash on campaign permalinks when displaying edit link.
+
+= 1.9.1: June 10, 2015 =
+
+* Fix: Corrected handling of different currency formats when saving campaign goal.
+
+= 1.9: June 1, 2015 =
+
+* Improvement: Split tallies of preapproved and completed payments for campaigns. This allows for simpler retrieval of the total pledged amount for a campaign.
+* Improvement: Consistent saving of custom post meta fields, with "campaign_" prepended before the meta key. This makes is easier to get those values back out using ATCF_Campaign's magic getter method (`__get()`).
+
+= 1.8.5: April 1, 2015 =
+
+* Fix: Campaign Submission form displays unformatted goal amount after Save & Preview.
+
+= 1.8.4: March 6, 2015 =
+
+* Fix: Backer count is correctly updated when multiple pledges to the same campaign are made in the same order.
+* Improvement: Permit multi-cart checkouts.
+* Removing code that is not used by Franklin (if you're using a different theme, you may experience issues)
+
+= 1.8.3: August 9, 2014 =
+
+* Improvement: Improves performance by retrieving campaign's total pledged amount in a single query.
+* Fix: A shipping bug that caused addresses outside the US or Canada to have the incorrect value.
+
 = 1.8.2: April 7, 2014 =
 
 * Fix: Make sure failed funds are properly re-processed when trying again.
