@@ -114,7 +114,7 @@ function atcf_profile_info_fields_contactmethods( $user, $userinfo ) {
 	foreach ( $methods as $key => $method ) {
 ?>
 	<p class="atcf-profile-info-<?php echo $key; ?>">
-		<label for="<?php echo $key; ?>"><?php printf( __( '%s URL', 'atcf' ), $method ); ?></label>
+		<label for="<?php echo $key; ?>"><?php echo $method ?></label>
 		<input type="text" name="<?php echo $key; ?>" id="bio" value="<?php echo esc_attr( $user->$key ); ?>" />
 	</p>
 <?php
