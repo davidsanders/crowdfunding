@@ -378,10 +378,6 @@ class ATCF_Campaign {
 			$this->current_amount = 0; 
 
 			foreach( $campaign_ids as $campaign_id ) {
-				// echo '<pre>';
-				// var_dump( get_post_meta( $campaign_id, '_edd_download_earnings', true ) );
-				// var_dump( get_post_meta( $campaign_id, '_edd_download_preapproved_earnings', true ) );
-				// die;
 				$this->current_amount += get_post_meta( $campaign_id, '_edd_download_earnings', true );
 				$this->current_amount += get_post_meta( $campaign_id, '_edd_download_preapproved_earnings', true );
 			}
