@@ -1,3 +1,7 @@
+#### 1.9.4: July 2, 2015
+
+* Fix: When pre-approvals are used on campaigns, backers were shown twice once the campaign was finished. 
+
 #### 1.9.3: July 2, 2015
 
 * Fix: Increase / decrease backer counts correctly after payments are processed.

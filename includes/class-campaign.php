@@ -212,9 +212,25 @@ class ATCF_Campaign {
 		if ( ! $backers )
 			return array();
 
+
+		$backers = array_reduce( $backers, array( $this, 'filter_duplicate_backers' ), array() );
+
 		if ( $unique )
 			return $this->unique_backers( $backers );
 
+		return array_values( $backers );
+	}
+	
+	/**
+	 * Filter out duplicate backers. 
+	 *
+	 * @return  array
+	 * @access  public
+	 * @since   1.9.4
+	 */
+	public function filter_duplicate_backers( $backers, $backer ) {
+		$payment_id = get_post_meta( $backer->ID, '_edd_log_payment_id', true );
+		$backers[ $payment_id ] = $backer;
 		return $backers;
 	}
 

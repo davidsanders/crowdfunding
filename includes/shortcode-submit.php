@@ -559,6 +559,10 @@ class ATCF_Submit_Campaign {
 			require_once( ABSPATH . 'wp-admin/includes/admin.php' );
 		}
 
+		if ( ! function_exists( 'wp_generate_attachment_metadata' ) ) {
+			require_once( ABSPATH . 'wp-admin/includes/image.php' );
+		}
+
 		$upload_overrides = array( 'test_form' => false );
 
 		if ( '' != $_FILES[ $key ][ 'name' ] ) {
