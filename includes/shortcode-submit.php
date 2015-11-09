@@ -366,7 +366,7 @@ class ATCF_Submit_Campaign {
 			break;
 
 			case 'description' :
-				$data = wp_richedit_pre( $campaign->data->post_content );
+				$data = wpautop( $campaign->data->post_content );
 			break;
 
 			case 'excerpt' :
@@ -374,7 +374,7 @@ class ATCF_Submit_Campaign {
 			break;
 
 			case 'updates' :
-				$data = wp_richedit_pre( $campaign->updates() );
+				$data = wpautop( $campaign->updates() );
 			break;
 
 			case 'norewards' :
@@ -711,7 +711,7 @@ function atcf_shortcode_submit( $atts = array() ) {
 		// If the current $post is a download, we know this is
 		// either a draft, pending or published campaign
 		if ( 'download' == $post->post_type) {
-			$is_draft   = 'draft' == $post->post_status;
+			$is_draft   = in_array( $post->post_status, array( 'draft', 'pending' ) );
 			$is_editing = ! $is_draft;
 
 			$campaign   = atcf_get_campaign( $post );
@@ -1104,7 +1104,6 @@ function atcf_shortcode_submit_field_wp_editor( $key, $field, $args ) {
 				'media_buttons' => true,
 				'teeny'         => true,
 				'quicktags'     => false,
-				'editor_css'    => '<style>body { background: white; }</style>',
 				'tinymce'       => array(
 					'theme_advanced_path'     => false,
 					'theme_advanced_buttons1' => 'bold,italic,bullist,numlist,blockquote,justifyleft,justifycenter,justifyright,link,unlink',

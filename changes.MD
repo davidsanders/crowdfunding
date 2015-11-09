@@ -1,4 +1,9 @@
-#### 1.9.4: July 2, 2015
+#### 1.9.5: November 9, 2015
+
+* Fix: When a campaign is pending, all fields are still editable. 
+* Fix: Correctly display render text within WP Editor in campaign submission form.
+
+#### 1.9.4: October 16, 2015
 
 * Fix: When pre-approvals are used on campaigns, backers were shown twice once the campaign was finished. 
 
