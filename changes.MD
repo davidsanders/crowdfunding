@@ -1,3 +1,7 @@
+#### 1.9.6: January 18, 2016
+
+* Fix: Correctly save the campaign goal after saving a campaign.
+
 #### 1.9.5: November 9, 2015
 
 * Fix: When a campaign is pending, all fields are still editable. 

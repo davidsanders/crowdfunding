@@ -533,6 +533,7 @@ function _atcf_metabox_campaign_info() {
 	</p>
 
 	<p>
+		<label for="campaign_goal"><strong><?php _e( 'Goal:', 'atcf' ) ?></strong></label><br />
 		<?php
 		$goal_args = array(
 			'name'  => 'campaign_goal',
@@ -616,7 +617,7 @@ function atcf_after_price_field() {
  *
  * @return string $price The formatted price
  */
-add_filter( 'edd_metabox_save_campaign_goal', 'edd_sanitize_price_save' );
+// add_filter( 'edd_metabox_save_campaign_goal', 'edd_sanitize_price_save' );
 
 /**
  * Updates Save
