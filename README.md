@@ -23,4 +23,4 @@ Fast-forward to late March and we have discovered that opal_wp, the creators of 
 
 Write to opal_wp and ask if _they_ will support the plugin for their customers. If they will not support it, you are unfortunately using a solution that is not actively developed or supported by anyone, and you may want to consider switching. 
 
-If you're looking for an actively developed & supported WordPress fundraising/crowdfunding solution, check out our plugin,  [https://www.wpcharitable.com/](Charitable). We even have a beautiful, free WordPress theme to go along with it: [http://demo.wpcharitable.com/reach/](Reach).
+If you're looking for an actively developed & supported WordPress fundraising/crowdfunding solution, check out our plugin,  (https://www.wpcharitable.com/)]Charitable]. We even have a beautiful, free WordPress theme to go along with it: [http://demo.wpcharitable.com/reach/](Reach).
