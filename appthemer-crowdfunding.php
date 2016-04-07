@@ -7,7 +7,7 @@ Author:				Studio 164a
 Author URI:			https://164a.com
 Version:     		1.9.6
 Text Domain: 		atcf
-GitHub Plugin URI: 	Studio164a/appthemer-crowdfunding
+GitHub Plugin URI: 	Studio164a/crowdfunding
 GitHub Branch:    	master
 */
 
