@@ -1,11 +1,6 @@
-# Crowdfunding by Astoundify #
+# About this plugin #
 
-## Installation ##
-
-1. You can clone the GitHub repository: `https://github.com/Studio164a/appthemer-crowdfunding/git`
-2. Or download it directly as a ZIP file: [https://github.com/Studio164a/appthemer-crowdfunding/zipball/master](https://github.com/Studio164a/appthemer-crowdfunding/zipball/master)
-
-This will download the latest developer copy of Crowdfunding by Astoundify.
+This is a fork of the plugin Astoundify by Crowdfunding. **It is unsupported.** We provide it here only to allow previous customers of our Franklin theme to download the last version.
 
 ## Note for Unity theme users ##
 
